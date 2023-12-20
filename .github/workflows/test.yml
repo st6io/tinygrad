@@ -246,7 +246,7 @@ jobs:
     #  run: WEBGPU=1 WGPU_BACKEND_TYPE=Metal python -m pytest -n=auto
     - name: Run selected webgpu tests
       run: |
-        WEBGPU=1 WGPU_BACKEND_TYPE=Metal python -m pytest -n=auto test/test_ops.py test/test_dtype.py \
+        WEBGPU=1 WGPU_BACKEND_TYPE=Metal python -m pytest test/test_ops.py test/test_dtype.py \
         test/test_jit.py test/test_symbolic_ops.py test/test_symbolic_jit.py test/test_linearizer.py \
         test/test_linearizer_failures.py test/test_nn.py
     - name: Build WEBGPU Efficientnet
@@ -287,9 +287,9 @@ jobs:
         METAL=1 python -c "from tinygrad import Device; assert Device.DEFAULT == 'METAL', Device.DEFAULT"
         METAL=1 DEBUG=4 FORWARD_ONLY=1 python3 test/test_ops.py TestOps.test_add
     - name: Run metal test
-      run: METAL=1 python -m pytest -n=auto test/ --ignore=test/external --ignore=test/models --durations=20
+      run: METAL=1 python -m pytest test/ --ignore=test/external --ignore=test/models --durations=20
     - name: Run ONNX
-      run: METAL=1 python -m pytest -n=auto test/external/external_test_onnx_backend.py
+      run: METAL=1 python -m pytest test/external/external_test_onnx_backend.py
     - name: Test tensor core ops
       run: METAL=1 TC=2 python test/test_ops.py TestOps.test_big_gemm
 
